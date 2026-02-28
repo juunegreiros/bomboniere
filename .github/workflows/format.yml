@@ -1,4 +1,4 @@
-name: ESlint
+name: Format
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  eslint:
+  format:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,4 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm install
-      - run: npm run lint
-
-
-       
+      - run: npm run format
