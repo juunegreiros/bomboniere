@@ -18,3 +18,8 @@
 - `view.ownOrder` Ver meus pedidos (Padrão para customer)
 - `edit.orderStatus` Ver status de pedidos
 - `manage.order` Gerencia pedidos feitos (criar, editar, histórico de pedidos)
+- `view.user` Ver usuários
+- `invite.user` Convidar usuários
+- `manage.user` Gerencia usuários
+- `view.role` Ver funções
+- `manage.role` Gerencia funções
