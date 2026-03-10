@@ -31,21 +31,21 @@
 - `status` string, obrigatório
 - `dataCriacao` date, obrigatório
 - `dataEncerramento` date, obrigatório
-- `cardapioItens`[], obrigatorio
+- `menuItems`[], obrigatorio
 
 ## Item de cardapio
 
 - `nameItem` string, obrigatório
-- `idCardapio` FK, uuid, obrigatório
-- `preço` double, obrigatório
+- `idMenu` FK, uuid, obrigatório
+- `price` double, obrigatório
 - `status` string, obrigatório
-- `idProduto` FK, uuid, obrigatório | `idReceita` FK, uuid, obrigatorio (ou um ou outro não pode haver os dois fks ao mesmo tempo)
-- `cardapios` [], obrigatorio
+- `idProduct` FK, uuid, obrigatório | `idRecipe` FK, uuid, obrigatorio (ou um ou outro não pode haver os dois fks ao mesmo tempo)
+- `menuList` [], obrigatorio
 
 ## Pedido
 
 - `id` Pk, uuid, obrigatório
-- `origem` string, obrigatório
+- `source` string, obrigatório
 - `session` string, obrigatorio se a origem for cinema
 - `seat` string, obrigatorio se a origem for cinema
 - `userId` string, obrigatorio se a origem for app
@@ -61,113 +61,10 @@
 ## Item do Pedido
 
 - `id` PK, uuid, obrigatorio
-- `idItemCardapio` FK, uuid, obrigatorio
+- `idMenuItem` FK, uuid, obrigatorio
 - `price` double, obrigatorio
 - `name` string, obrigatorio
 - `idPedido` FK, uuid, obrigatorio
-
-## Exemplos de request:
-
-### Produto:
-
-    {
-    id: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    name: "Refrigerante lata Coca-Cola 300ml",
-    price: 5.00,
-    stock: 10,
-    status: "ativo" | "inativo"
-    }
-
-### Ingrediente:
-
-    {
-    id:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    name:"milho",
-    unidadeMedida: "grama",
-    stock:"2000",
-    recipes: [
-    	{
-    		idReceita:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    		idIngredientes:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    		quantidade:"20"
-    	},
-    ]
-    }
-
-### Receita:
-
-    {
-    	id: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    	name:"Pipoca salgada grande",
-    	status: "ativo" | "inativo",
-    	price: 20.00,
-    	ingredients: [
-    		{
-    			idReceita: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    			idIngredientes:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    			quantidade:"20"
-    		}
-    	]
-    }
-
-### Cardapio:
-
-    {
-    id: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    name: "Cardápio promocional de natal",
-    status: "ativo" | "inativo",
-    dataEncerramento: "20102026" -> adicionar barra
-    cardapioItems: [
-        {
-            idIngrediente:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            idItemcardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            price:35.00
-        }
-    ]
-    }
-
-### Item Cardapio:
-
-    {
-    id: “d603bda9-a6aa-4ebe-bd72-51a900301b2d”,
-    name:"Pipoca salgada grande",
-    status: "ativo" | "inativo",
-    idProduto:"d603bda9-a6aa-4ebe-bd72-51a900301b2d", *coment* ou idReceita, não pode ser os dois ao mesmo tempo
-    cardapios: [
-        {
-            idCardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            idItemCardapio:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            price:35.00
-        }
-    ]
-    }
-
-### Pedido:
-
-    {
-    id: “d603bda9-a6aa-4ebe-bd72-51a900301b2d”,
-    origem: "caixa" | "app" | "cinema",
-    session: "Homem-aranha 21:00 sala B",
-    seat: "F21",
-    userId: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    dataCriacao: 21032026,
-    status: "created" | "preparing" | "ready" | "delivered" | "cancelled",
-    orderItems: [
-        {
-            itemPedido:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
-        }
-    ]
-    }
-
-## Item do Pedido
-
-{
-id:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-idItemCardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-price: 35.00,
-name: "Pipoca grande salgada",
-pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
-}
 
 ## Exemplos de resposta
 
@@ -190,8 +87,8 @@ pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
     stock:"2000",
     recipes: [
     	{
-    		idReceita:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    		idIngredientes:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+    		idRecipe:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+    		idIngredients:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
     		quantidade:"20"
     	},
     ]
@@ -206,40 +103,40 @@ pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
     	price: 20.00,
     	ingredients: [
     		{
-    			idReceita: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    			idIngredientes:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+    			idRecipe: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+    			idIngredients:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
     			quantidade:"20"
     		}
     	]
     }
 
-### Cardapio:
+### menu:
 
     {
     id: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
     name: "Cardápio promocional de natal",
     status: "ativo" | "inativo",
-    dataEncerramento: "20102026" -> adicionar barra
-    cardapioItems: [
+    dataEncerramento: "20/10/2026"
+    menuItems: [
         {
-            idIngrediente:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            idItemcardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+            idIngredient:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+            idMenuItem: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
             price:35.00
         }
     ]
     }
 
-### Item Cardapio:
+### Item menu:
 
     {
     id: “d603bda9-a6aa-4ebe-bd72-51a900301b2d”,
     name:"Pipoca salgada grande",
     status: "ativo" | "inativo",
-    idProduto:"d603bda9-a6aa-4ebe-bd72-51a900301b2d", *coment* ou idReceita, não pode ser os dois ao mesmo tempo
-    cardapios: [
+    idProduct:"d603bda9-a6aa-4ebe-bd72-51a900301b2d", //ou idRecipe, não pode ser os dois ao mesmo tempo
+    menuList: [
         {
-            idCardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-            idItemCardapio:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+            idMenu: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+            idMenuItem:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
             price:35.00
         }
     ]
@@ -249,15 +146,15 @@ pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
 
     {
     id: “d603bda9-a6aa-4ebe-bd72-51a900301b2d”,
-    origem: "caixa" | "app" | "cinema",
+    source: "caixa" | "app" | "cinema",
     session: "Homem-aranha 21:00 sala B",
     seat: "F21",
     userId: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-    dataCriacao: 21032026,
+    dataCriacao: 21/03/2026,
     status: "created" | "preparing" | "ready" | "delivered" | "cancelled",
     orderItems: [
         {
-            itemPedido:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
+            orderItem:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
         }
     ]
     }
@@ -266,8 +163,8 @@ pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
 
 {
 id:"d603bda9-a6aa-4ebe-bd72-51a900301b2d",
-idItemCardapio: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
+idMenuItem: "d603bda9-a6aa-4ebe-bd72-51a900301b2d",
 price: 35.00,
 name: "Pipoca grande salgada",
-pedidoId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
+orderId:"d603bda9-a6aa-4ebe-bd72-51a900301b2d"
 }
