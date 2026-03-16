@@ -22,6 +22,7 @@
 - `description` string
 - `name` string, obrigatório
 - `status` string, obrigatório
+- `price` double, obrigatório
 - `ingredients` [], obrigatorio
 
 ## Cardapio

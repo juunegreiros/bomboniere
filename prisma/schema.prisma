@@ -12,3 +12,164 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Produto {
+  id     String @id @default(uuid())
+  name   String
+  price  Float
+  stock  Int
+  status String
+
+  itemMenu ProdutoitemMenu[]
+  itemMenus itemMenu[]
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+}
+
+model Ingredient {
+  id     String @id @default(uuid())
+  name   String
+  unidademedida  Float
+  stock  Int
+  recipes RecipeIngredient[]
+
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+}
+
+model RecipeIngredient {
+
+  idRecipe String
+  idIngredient String
+  quantity Float
+
+  recipe Recipe @relation(fields: [idRecipe], references: [id], onDelete: Restrict)
+  ingredient Ingredient @relation(fields: [idIngredient], references: [id], onDelete: Restrict)
+
+  @@id([idRecipe, idIngredient])
+}
+
+model Recipe {
+  id     String @id @default(uuid())
+  name   String
+  description String
+  price  Float
+  status String
+
+  ingredients RecipeIngredient[]
+  itemMenu RecipeitemMenu[]
+  itemMenus itemMenu[]
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+  
+}
+
+model Menu {
+  id     String @id @default(uuid())
+  name   String
+  datacriacao DateTime
+  dataencerramento  DateTime
+  status String
+
+  menuItems MenuitemMenu[]
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+}
+
+
+model itemMenu {
+  id     String @id @default(uuid())
+  status String
+  price Float
+  produto Produto? @relation(fields: [idProduto], references: [id], onDelete: Restrict)
+  idProduto String?
+  recipe Recipe? @relation(fields: [idRecipe], references: [id], onDelete: Restrict)
+  idRecipe String?
+
+  menuItems MenuitemMenu[]
+  menuProdutos ProdutoitemMenu[]
+  menuRecipes RecipeitemMenu[]
+  itemPedidos itemPedido[]
+  pedidos PedidoItemPedido[]
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+
+}
+
+model MenuitemMenu{
+  idMenu String
+  idItemMenu String
+
+  menu Menu @relation(fields: [idMenu], references: [id], onDelete: Restrict)
+  itemMenu itemMenu @relation(fields: [idItemMenu], references: [id], onDelete: Restrict)
+
+  @@id([idMenu, idItemMenu])
+}
+
+model ProdutoitemMenu {
+  idProduto String?
+  idItemMenu String
+
+  produto Produto? @relation(fields: [idProduto], references: [id], onDelete: Restrict)
+  itemMenu itemMenu @relation(fields: [idItemMenu], references: [id], onDelete: Restrict)
+
+  @@id([idItemMenu])
+}
+
+model RecipeitemMenu {
+  idRecipe String?
+  idItemMenu String
+
+  recipe Recipe? @relation(fields: [idRecipe], references: [id], onDelete: Restrict)
+  itemMenu itemMenu @relation(fields: [idItemMenu], references: [id], onDelete: Restrict)
+
+  @@id([idItemMenu])
+}
+
+model Pedido {
+  id     String @id @default(uuid())
+  source String
+  session String?
+  seat String?
+  userId String?
+  dataCriacao DateTime
+  status String @default("created")
+
+  itemsPedido PedidoItemPedido[]
+  itemPedidos itemPedido[]
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+}
+
+model PedidoItemPedido {
+  idPedido String
+  idItemMenu String
+
+  pedido Pedido @relation(fields: [idPedido], references: [id], onDelete: Restrict)
+  itemMenu itemMenu @relation(fields: [idItemMenu], references: [id], onDelete: Restrict)
+
+  @@id([idPedido, idItemMenu])
+}
+
+model itemPedido {
+  id     String @id @default(uuid())
+  name String
+  price Float
+  itemmenu itemMenu @relation(fields: [idItemMenu], references: [id], onDelete: Restrict)
+  idItemMenu String
+  pedido Pedido @relation(fields: [idPedido], references: [id], onDelete: Restrict)
+  idPedido String
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+}
+
+
+
+
