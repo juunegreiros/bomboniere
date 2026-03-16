@@ -170,6 +170,25 @@ model itemPedido {
   UpdatedAt DateTime @updatedAt
 }
 
+model Permission {
+  id            String @id @default(uuid())
+  key           String
+  description   String
+  role          Role[]
+}
 
+model Role {
+  id            String @id @default(uuid())
+  name          String
+  description   String
+  permissions   Permission[]
+  users         User[]
+}
 
-
+model User {
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  password      String
+  roles          Role[]
+}
