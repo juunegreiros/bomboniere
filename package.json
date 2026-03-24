@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "format:check": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:migrate": "prisma migrate dev && prisma generate",
+    "db:init": "docker compose up",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
