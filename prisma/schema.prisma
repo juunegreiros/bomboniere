@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -64,7 +63,6 @@ model Recipe {
 
   CreatedAt DateTime @default(now())
   UpdatedAt DateTime @updatedAt
-  
 }
 
 model Menu {
@@ -98,7 +96,6 @@ model itemMenu {
 
   CreatedAt DateTime @default(now())
   UpdatedAt DateTime @updatedAt
-
 }
 
 model MenuitemMenu{
@@ -190,5 +187,5 @@ model User {
   name          String
   email         String @unique
   password      String
-  roles          Role[]
+  roles         Role[]
 }
