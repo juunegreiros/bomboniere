@@ -6,7 +6,7 @@ export async function GET() {
   return NextResponse.json({ data: products }, { status: 200 })
 }
 
-export async function Post(request: Request) {
+export async function POST(request: Request) {
   const body = await request.json()
   const { id, name, price, stock, status } = body
   const product = await createProduct({ id, name, price, stock, status })
