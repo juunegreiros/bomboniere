@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "db:migrate": "prisma migrate dev && prisma generate",
     "db:init": "docker compose up",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset && npm run db:seed"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
@@ -20,7 +22,8 @@
     "next": "16.1.6",
     "pg": "^8.20.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

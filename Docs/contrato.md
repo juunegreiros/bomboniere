@@ -11,7 +11,7 @@
 ## Ingrediente
 
 - `name` string,obrigatório
-- `unidadeMedida` double, obrigatório
+- `unidadeMedida` string, obrigatório
 - `id` PK, uuid, obrigatório
 - `stock` int, obrigatório
 - `recipes` [], obrigatório
