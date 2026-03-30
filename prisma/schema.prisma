@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -30,7 +29,7 @@ model Produto {
 model Ingredient {
   id     String @id @default(uuid())
   name   String
-  unidademedida  Float
+  unidademedida  String
   stock  Int
   recipes RecipeIngredient[]
 
