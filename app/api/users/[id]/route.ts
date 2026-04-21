@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getUserById, updateUser } from '@/app/modules/users/users.repo'
+import { deleteUser, getUserById, updateUser } from '@/app/modules/users/users.repo'
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   const { id } = await params
@@ -14,4 +14,11 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   const updatedUser = await updateUser(id, body)
 
   return NextResponse.json({ data: updatedUser }, { status: 200 })
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const { id } = await params
+  await deleteUser(id)
+
+  return new Response(null, { status: 204 })
 }
