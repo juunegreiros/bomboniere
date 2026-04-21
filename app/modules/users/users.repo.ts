@@ -27,3 +27,11 @@ export async function createUser(user: User) {
 
   return users
 }
+
+export async function getUserById(id: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+  })
+
+  return user
+}
