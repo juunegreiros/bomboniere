@@ -15,3 +15,15 @@ export async function listUser() {
 
   return users
 }
+
+export async function createUser(user: User) {
+  const users = await prisma.user.create({
+    data: {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+    },
+  })
+
+  return users
+}
