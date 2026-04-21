@@ -11,12 +11,13 @@
     "format": "prettier --write .",
     "db:migrate": "prisma migrate dev && prisma generate",
     "db:init": "docker compose up",
+    "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
-    "db:studio": "prisma studio"
+    "db:reset": "prisma migrate reset && npm run db:seed"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
     "dotenv": "^17.3.1",
     "next": "16.1.6",
     "pg": "^8.20.0",
@@ -26,14 +27,15 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/pg": "^8.18.0",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "prettier": "^3.8.1",
-    "prisma": "^7.4.2",
+    "prisma": "^7.5.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
